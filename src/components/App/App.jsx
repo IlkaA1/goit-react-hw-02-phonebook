@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 import Filter from '../Filter/Filter';
+import Contact from '../Contact/Contact';
 
 export class App extends Component {
   state = {
@@ -12,12 +13,20 @@ export class App extends Component {
 
   addNewContact = info => {
     this.setState(prevState => ({ contacts: [...prevState.contacts, info] }));
-    console.log(this.state.contacts);
   };
 
   startFilter = name => {
     this.setState({ filter: name.currentTarget.value });
-    console.log(this.state.filter);
+  };
+
+  getFilteredElement = () => {
+    const { contacts, filter } = this.state;
+
+    const oneContact = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    return oneContact;
   };
 
   render() {
@@ -29,6 +38,7 @@ export class App extends Component {
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.startFilter} />
         <ContactList listWithContacts={contacts} />
+        <Contact getFilteredElement={this.getFilteredElement()} />
       </div>
     );
   }

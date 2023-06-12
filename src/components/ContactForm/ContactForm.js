@@ -22,7 +22,6 @@ class ContactForm extends Component {
       name: evt.target.elements.name.value,
       number: evt.target.elements.number.value,
     };
-    console.log(info);
 
     this.props.addContact(info);
 
