@@ -1,4 +1,5 @@
 import css from './list.module.css';
+import PropTypes from 'prop-types';
 
 const ContactList = ({ listWithContacts, getFilteredElement, toDelete }) => {
   return (
@@ -17,5 +18,11 @@ const ContactList = ({ listWithContacts, getFilteredElement, toDelete }) => {
           ))}
     </ul>
   );
+};
+
+ContactList.propTypes = {
+  listWithContacts: PropTypes.array.isRequired,
+  getFilteredElement: PropTypes.array.isRequired,
+  toDelete: PropTypes.func.isRequired,
 };
 export default ContactList;
