@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
+
 import css from './form.module.css';
 import PropTypes from 'prop-types';
 
@@ -9,23 +9,14 @@ class ContactForm extends Component {
     number: '',
   };
 
-  loginInputId = nanoid();
-
   onChangeState = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
 
   handleSubmit = evt => {
     evt.preventDefault();
-    let loginInputId = nanoid();
 
-    const info = {
-      id: loginInputId,
-      name: evt.target.elements.name.value,
-      number: evt.target.elements.number.value,
-    };
-
-    this.props.addContact(info);
+    this.props.addContact(this.state);
 
     this.reset();
   };
@@ -39,7 +30,7 @@ class ContactForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} className={css.container}>
-          <label htmlFor={this.nameInputId}>
+          <label>
             Name
             <input
               type="text"
@@ -48,11 +39,10 @@ class ContactForm extends Component {
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               value={name}
               onChange={this.onChangeState}
-              id={this.loginInputId}
               required
             />
           </label>
-          <label htmlFor={this.nameInputId}>
+          <label>
             Number
             <input
               type="tel"
@@ -61,7 +51,6 @@ class ContactForm extends Component {
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               value={number}
               onChange={this.onChangeState}
-              id={this.loginInputId}
               required
             />
           </label>
